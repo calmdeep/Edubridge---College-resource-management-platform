@@ -14,7 +14,7 @@ import ResourceDetails from "../pages/ResourceDetails";
 import AdminDashboard from "../pages/Admin/AdminDashboard";
 import MyBookmarks from "../pages/MyBookmarks";
 import ManageUsers from "../pages/Admin/ManageUsers";
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../Components/ProtectedRoute";
 
 export default function AppRoutes() {
   return (
