@@ -1,17 +1,21 @@
-# React + Vite
+# Edubridge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Edubridge is a modern web-based academic resource sharing platform designed to help university students discover, organize, and contribute educational materials in a collaborative environment. The platform enables students to upload and access study resources such as lecture notes, previous year question papers (PYQs), tutorials, and educational videos, all categorized by course, branch, year, semester, and subject.
 
-Currently, two official plugins are available:
+The application features a secure authentication system, role-based access control, resource approval workflows, bookmarking functionality, advanced filtering, and personalized dashboards for both students and administrators. Resources submitted by users undergo an admin review process to ensure quality, relevance, and authenticity before becoming available to the community.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Built with React, Firebase, Tailwind CSS, and Vite, College Smart Hub focuses on delivering a fast, responsive, and user-friendly experience across desktop, tablet, and mobile devices. The platform promotes knowledge sharing, reduces the effort required to find academic resources, and encourages collaborative learning among students.
 
-## React Compiler
+### Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Secure user authentication and authorization
+* Resource upload and approval workflow
+* Notes, PYQs, and video resource management
+* Advanced search and filtering system
+* Bookmark favorite resources
+* Personalized student dashboard
+* Administrative management panel
+* Responsive and modern UI/UX
+* Firebase-powered real-time backend
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# Edubridge---College-resource-management-platform" 
+aims to create a centralized digital learning ecosystem where students can efficiently share knowledge and access high-quality academic resources anytime, anywhere.
