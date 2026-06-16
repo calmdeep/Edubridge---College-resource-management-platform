@@ -1,9 +1,5 @@
 export const COURSES = [
   "BTech",
-  "BCA",
-  "BSc",
-  "MTech",
-  "MCA",
 ];
 
 export const BRANCHES = [
