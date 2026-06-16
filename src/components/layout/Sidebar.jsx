@@ -14,22 +14,21 @@ import {
 
 import { useAuth } from "../../context/AuthContext";
 
-export default function Sidebar({
-  sidebarOpen,
-  setSidebarOpen,
-}) {
+export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const { userData } = useAuth();
+  console.log("USER DATA:", userData);
 
   const location = useLocation();
+  {
+    console.log("ROLE:", userData?.role);
+  }
 
   const menuItem =
     "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200";
 
-  const active =
-    "bg-purple-600 text-white shadow";
+  const active = "bg-purple-600 text-white shadow";
 
-  const normal =
-    "text-slate-300 hover:bg-white/10 hover:text-white";
+  const normal = "text-slate-300 hover:bg-white/10 hover:text-white";
 
   return (
     <>
@@ -37,9 +36,7 @@ export default function Sidebar({
 
       {sidebarOpen && (
         <div
-          onClick={() =>
-            setSidebarOpen(false)
-          }
+          onClick={() => setSidebarOpen(false)}
           className="
           fixed
           inset-0
@@ -64,11 +61,7 @@ export default function Sidebar({
         transition-transform
         duration-300
 
-        ${
-          sidebarOpen
-            ? "translate-x-0"
-            : "-translate-x-full"
-        }
+        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
 
         lg:translate-x-0
         `}
@@ -76,9 +69,7 @@ export default function Sidebar({
         {/* Mobile Close */}
 
         <button
-          onClick={() =>
-            setSidebarOpen(false)
-          }
+          onClick={() => setSidebarOpen(false)}
           className="
           lg:hidden
           absolute
@@ -96,47 +87,28 @@ export default function Sidebar({
           <p className="text-slate-400 text-sm mt-1">
             College Resource Platform
           </p>
-
         </div>
 
         {/* User */}
 
         <div className="px-6 py-5">
-
           <div className="bg-white/5 rounded-2xl p-4">
-
             <div className="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-lg">
-
               {userData?.name?.charAt(0)}
-
             </div>
 
-            <h3 className="text-white mt-3 font-semibold">
-              {userData?.name}
-            </h3>
+            <h3 className="text-white mt-3 font-semibold">{userData?.name}</h3>
 
-            <p className="text-slate-400 text-sm">
-              {userData?.role}
-            </p>
-
+            <p className="text-slate-400 text-sm">{userData?.role}</p>
           </div>
-
         </div>
 
         <nav className="px-4 space-y-2">
-
           <Link
             to="/dashboard"
-            onClick={() =>
-              setSidebarOpen(false)
-            }
+            onClick={() => setSidebarOpen(false)}
             className={`${menuItem}
-            ${
-              location.pathname ===
-              "/dashboard"
-                ? active
-                : normal
-            }`}
+            ${location.pathname === "/dashboard" ? active : normal}`}
           >
             <FaHome />
             Dashboard
@@ -144,16 +116,9 @@ export default function Sidebar({
 
           <Link
             to="/resources"
-            onClick={() =>
-              setSidebarOpen(false)
-            }
+            onClick={() => setSidebarOpen(false)}
             className={`${menuItem}
-            ${
-              location.pathname ===
-              "/resources"
-                ? active
-                : normal
-            }`}
+            ${location.pathname === "/resources" ? active : normal}`}
           >
             <FaBook />
             Resources
@@ -161,16 +126,9 @@ export default function Sidebar({
 
           <Link
             to="/upload"
-            onClick={() =>
-              setSidebarOpen(false)
-            }
+            onClick={() => setSidebarOpen(false)}
             className={`${menuItem}
-            ${
-              location.pathname ===
-              "/upload"
-                ? active
-                : normal
-            }`}
+            ${location.pathname === "/upload" ? active : normal}`}
           >
             <FaUpload />
             Upload Resource
@@ -178,16 +136,9 @@ export default function Sidebar({
 
           <Link
             to="/my-uploads"
-            onClick={() =>
-              setSidebarOpen(false)
-            }
+            onClick={() => setSidebarOpen(false)}
             className={`${menuItem}
-            ${
-              location.pathname ===
-              "/my-uploads"
-                ? active
-                : normal
-            }`}
+            ${location.pathname === "/my-uploads" ? active : normal}`}
           >
             <FaClipboardCheck />
             My Uploads
@@ -195,16 +146,9 @@ export default function Sidebar({
 
           <Link
             to="/my-bookmarks"
-            onClick={() =>
-              setSidebarOpen(false)
-            }
+            onClick={() => setSidebarOpen(false)}
             className={`${menuItem}
-            ${
-              location.pathname ===
-              "/my-bookmarks"
-                ? active
-                : normal
-            }`}
+            ${location.pathname === "/my-bookmarks" ? active : normal}`}
           >
             <FaBookmark />
             Bookmarks
@@ -212,21 +156,50 @@ export default function Sidebar({
 
           <Link
             to="/profile"
-            onClick={() =>
-              setSidebarOpen(false)
-            }
+            onClick={() => setSidebarOpen(false)}
             className={`${menuItem}
-            ${
-              location.pathname ===
-              "/profile"
-                ? active
-                : normal
-            }`}
+            ${location.pathname === "/profile" ? active : normal}`}
           >
             <FaUser />
             Profile
           </Link>
+          {userData?.role === "admin" && (
+            <>
+              <div className="pt-5 pb-2 px-4 text-xs uppercase text-slate-500 font-semibold">
+                Administration
+              </div>
 
+              <Link
+                to="/admin"
+                onClick={() => setSidebarOpen(false)}
+                className={`${menuItem}
+      ${location.pathname === "/admin" ? active : normal}`}
+              >
+                <FaCog />
+                Admin Dashboard
+              </Link>
+
+              <Link
+                to="/admin/resources"
+                onClick={() => setSidebarOpen(false)}
+                className={`${menuItem}
+      ${location.pathname === "/admin/resources" ? active : normal}`}
+              >
+                <FaClipboardCheck />
+                Manage Resources
+              </Link>
+
+              <Link
+                to="/admin/users"
+                onClick={() => setSidebarOpen(false)}
+                className={`${menuItem}
+      ${location.pathname === "/admin/users" ? active : normal}`}
+              >
+                <FaUsers />
+                Manage Users
+              </Link>
+            </>
+          )}
         </nav>
       </aside>
     </>

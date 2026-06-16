@@ -26,6 +26,7 @@ export default function Resources() {
   const [semester, setSemester] = useState("");
 
   const [subject, setSubject] = useState("");
+  const availableSubjects = SUBJECTS?.[branch]?.[year]?.[semester] || [];
   const [type, setType] = useState("");
 
   useEffect(() => {
@@ -115,6 +116,8 @@ mb-5
             value={branch}
             onChange={(e) => {
               setBranch(e.target.value);
+              setYear("");
+              setSemester("");
               setSubject("");
             }}
             className="bg-slate-100 rounded-xl p-3"
@@ -130,7 +133,10 @@ mb-5
 
           <select
             value={semester}
-            onChange={(e) => setSemester(e.target.value)}
+            onChange={(e) => {
+              setSemester(e.target.value);
+              setSubject("");
+            }}
             className="bg-slate-100 rounded-xl p-3"
           >
             <option value="">All Semesters</option>
@@ -144,7 +150,10 @@ mb-5
 
           <select
             value={year}
-            onChange={(e) => setYear(e.target.value)}
+            onChange={(e) => {
+              setYear(e.target.value);
+              setSubject("");
+            }}
             className="bg-slate-100 rounded-xl p-3"
           >
             <option value="">All Years</option>
@@ -163,7 +172,7 @@ mb-5
           >
             <option value="">All Subjects</option>
 
-            {(SUBJECTS[branch] || []).map((item) => (
+            {availableSubjects.map((item) => (
               <option key={item} value={item}>
                 {item}
               </option>

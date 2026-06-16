@@ -8,7 +8,7 @@ export const COURSES = [
 
 export const BRANCHES = [
   "CSE",
-  "IT",
+  "AI/ML",
   "ECE",
   "EEE",
   "ME",
@@ -36,17 +36,61 @@ export const RESOURCE_TYPES = [
 ];
 
 export const SUBJECTS = {
-  CSE: [
-    "DBMS",
-    "Operating System",
-    "Computer Networks",
-    "Software Engineering",
-    "Machine Learning",
-    "Artificial Intelligence",
-    "Compiler Design",
-    "Computer Graphics",
-    "Total Quality Management",
-  ],
+ CSE: {
+    1: {
+      1: [
+        "Engineering Mathematics",
+        "Engineering Physics",
+        "Programming Fundamentals C",
+        "Basic Electrical Engineering",
+        "Environment Studies",
+      ],
+      2: [
+        "Mathematics II",
+        "Chemistry",
+        "Basic Electronics Engineering",
+        "Basic Mechanical Engineering",
+      ],
+    },
+
+    2: {
+      3: [
+        "Data Structures and Algorithms",
+        "OOPs",
+        "Discrete Mathematics",
+        "Technical Communication",
+        "Advanced Applied Mathematics",
+        "Python Programming",
+      ],
+      4: [
+        "Digital Electronics",
+        "Universal Human Value",
+        "Computer Organization and Architecture",
+        "JAVA Programming",
+        "Formal Languages and Automata Theory",
+        "Cyber Security",
+      ],
+    },
+
+    3: {
+      5: [
+        "Design and Analysis of Algorithms",
+        "Database Management System",
+        "Compiler Design",
+        "Graph Theory",
+        "Distributed System",
+        "Constitution of India",
+      ],
+      6: [
+        "Computer Networks",
+        "Artificial Intelligence",
+        "Essence of Indian Traditional Knowledege",
+        "Happiness and Well-being",
+        "Internet of Things",
+        "Total Quality Management",
+      ],
+    },
+  },
 
   IT: [
     "DBMS",
