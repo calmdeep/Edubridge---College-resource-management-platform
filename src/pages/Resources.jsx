@@ -3,7 +3,13 @@ import { Link } from "react-router-dom";
 
 import DashboardLayout from "../components/layout/DashboardLayout";
 
-import { getApprovedResources } from "../services/resourceService";
+import {
+  getApprovedResourcesByProfile,
+} from "../services/resourceService";
+import {
+  getApprovedResources,
+} from "../services/resourceService";
+import { useAuth } from "../context/AuthContext";
 
 import {
   COURSES,
@@ -15,6 +21,7 @@ import {
 } from "../utils/constants";
 
 export default function Resources() {
+  const { userData } = useAuth();
   const [resources, setResources] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -29,14 +36,16 @@ export default function Resources() {
   const availableSubjects = SUBJECTS?.[branch]?.[year]?.[semester] || [];
   const [type, setType] = useState("");
 
-  useEffect(() => {
-    loadResources();
-  }, []);
+useEffect(() => {
+  loadResources();
+}, []);
+const loadResources = async () => {
 
-  const loadResources = async () => {
-    const data = await getApprovedResources();
-    setResources(data);
-  };
+  const data =
+    await getApprovedResources();
+
+  setResources(data);
+};
 
   const filteredResources = resources.filter((resource) => {
     return (

@@ -55,7 +55,6 @@ export const getBookmarks =
       ...doc.data(),
     }));
 };
-
 export const removeBookmark =
   async (bookmarkId) => {
 
@@ -141,7 +140,25 @@ export const getApprovedResources = async () => {
     ...doc.data(),
   }));
 };
+export const getApprovedResourcesByProfile = async (
+  course,
+  branch
+) => {
 
+  const q = query(
+    collection(db, "resources"),
+    where("status", "==", "approved"),
+    where("course", "==", course),
+    where("branch", "==", branch)
+  );
+
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
 /* ==========================
    PENDING RESOURCES
 ========================== */

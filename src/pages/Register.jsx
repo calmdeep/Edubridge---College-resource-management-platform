@@ -1,67 +1,46 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../services/authService";
-
+import { COURSES, BRANCHES } from "../utils/constants";
 export default function Register() {
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const [name, setName] = useState("");
-const [course, setCourse] = useState("");
-const [branch, setBranch] = useState("");
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [course, setCourse] = useState("");
+  const [branch, setBranch] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-const handleRegister = async (e) => {
-e.preventDefault();
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
+    if (!name || !course || !branch || !email || !password) {
+      alert("Please fill all fields");
+      return;
+    }
 
-if (
-  !name ||
-  !course ||
-  !branch ||
-  !email ||
-  !password
-) {
-  alert("Please fill all fields");
-  return;
-}
+    try {
+      setLoading(true);
 
-try {
-  setLoading(true);
+      await registerUser(name, email, password, course, branch);
 
-  await registerUser(
-    name,
-    email,
-    password,
-    course,
-    branch
-  );
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  navigate("/dashboard");
+  return (
+    <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
+      {/* Left Side */}
 
-} catch (error) {
-
-  console.error(error);
-  alert(error.message);
-
-} finally {
-
-  setLoading(false);
-
-}
-
-
-};
-
-return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
-
-
-  {/* Left Side */}
-
-  <div
-    className="
+      <div
+        className="
     hidden
     lg:flex
     flex-col
@@ -73,12 +52,10 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
     text-white
     p-16
     "
-  >
-
-    <div>
-
-      <div
-        className="
+      >
+        <div>
+          <div
+            className="
         inline-flex
         items-center
         gap-2
@@ -90,60 +67,53 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
         text-sm
         font-medium
         "
-      >
-        🎓 College Smart Hub
+          >
+            🎓 College Smart Hub
+          </div>
+
+          <h1 className="mt-10 text-6xl font-bold leading-tight">
+            Join.
+            <br />
+            Learn.
+            <br />
+            Excel.
+          </h1>
+
+          <p className="mt-6 text-lg text-purple-100 max-w-lg">
+            Create your account and gain access to notes, PYQs, video resources
+            and study material shared by students.
+          </p>
+
+          <div className="mt-12 space-y-4">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
+              📚 Verified Study Resources
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
+              🎥 Video Tutorials & Learning Links
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
+              📄 Previous Year Question Papers
+            </div>
+
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
+              🚀 Community Driven Learning
+            </div>
+          </div>
+        </div>
+
+        <div className="text-purple-100 text-sm">
+          © {new Date().getFullYear()} College Smart Hub
+        </div>
       </div>
 
-      <h1 className="mt-10 text-6xl font-bold leading-tight">
-        Join.
-        <br />
-        Learn.
-        <br />
-        Excel.
-      </h1>
+      {/* Right Side */}
 
-      <p className="mt-6 text-lg text-purple-100 max-w-lg">
-        Create your account and gain access
-        to notes, PYQs, video resources and
-        study material shared by students.
-      </p>
-
-      <div className="mt-12 space-y-4">
-
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
-          📚 Verified Study Resources
-        </div>
-
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
-          🎥 Video Tutorials & Learning Links
-        </div>
-
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
-          📄 Previous Year Question Papers
-        </div>
-
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5">
-          🚀 Community Driven Learning
-        </div>
-
-      </div>
-
-    </div>
-
-    <div className="text-purple-100 text-sm">
-      © {new Date().getFullYear()} College Smart Hub
-    </div>
-
-  </div>
-
-  {/* Right Side */}
-
-  <div className="flex items-center justify-center p-6">
-
-    <div className="w-full max-w-lg">
-
-      <div
-        className="
+      <div className="flex items-center justify-center p-6">
+        <div className="w-full max-w-lg">
+          <div
+            className="
         bg-white/90
         backdrop-blur-xl
         rounded-3xl
@@ -152,39 +122,30 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
         border-slate-100
         p-8
         "
-      >
+          >
+            <div className="text-center mb-8">
+              <div className="lg:hidden mb-4">
+                <h1 className="text-2xl font-bold text-purple-700">
+                  College Smart Hub
+                </h1>
+              </div>
 
-        <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-slate-900">
+                Create Account
+              </h2>
 
-          <div className="lg:hidden mb-4">
-            <h1 className="text-2xl font-bold text-purple-700">
-              College Smart Hub
-            </h1>
-          </div>
+              <p className="text-slate-500 mt-3">
+                Start your learning journey today.
+              </p>
+            </div>
 
-          <h2 className="text-4xl font-bold text-slate-900">
-            Create Account
-          </h2>
-
-          <p className="text-slate-500 mt-3">
-            Start your learning journey today.
-          </p>
-
-        </div>
-
-        <form
-          onSubmit={handleRegister}
-          className="space-y-5"
-        >
-
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) =>
-              setName(e.target.value)
-            }
-            className="
+            <form onSubmit={handleRegister} className="space-y-5">
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="
             w-full
             bg-slate-100
             rounded-xl
@@ -193,56 +154,52 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
             focus:ring-2
             focus:ring-purple-500
             "
-          />
+              />
 
-          <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <select
+  value={course}
+  onChange={(e) =>
+    setCourse(e.target.value)
+  }
+  className="w-full bg-slate-100 rounded-xl p-4"
+>
+  <option value="">
+    Select Course
+  </option>
 
-            <input
-              type="text"
-              placeholder="Course"
-              value={course}
-              onChange={(e) =>
-                setCourse(e.target.value)
-              }
-              className="
-              w-full
-              bg-slate-100
-              rounded-xl
-              p-4
-              outline-none
-              focus:ring-2
-              focus:ring-purple-500
-              "
-            />
+  {COURSES.map((item) => (
+    <option key={item} value={item}>
+      {item}
+    </option>
+  ))}
+</select>
 
-            <input
-              type="text"
-              placeholder="Branch"
-              value={branch}
-              onChange={(e) =>
-                setBranch(e.target.value)
-              }
-              className="
-              w-full
-              bg-slate-100
-              rounded-xl
-              p-4
-              outline-none
-              focus:ring-2
-              focus:ring-purple-500
-              "
-            />
+                <select
+  value={branch}
+  onChange={(e) =>
+    setBranch(e.target.value)
+  }
+  className="w-full bg-slate-100 rounded-xl p-4"
+>
+  <option value="">
+    Select Branch
+  </option>
 
-          </div>
+  {BRANCHES.map((item) => (
+    <option key={item} value={item}>
+      {item}
+    </option>
+  ))}
+</select>
+              </div>
 
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) =>
-              setEmail(e.target.value)
-            }
-            className="
+              <input
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="
             w-full
             bg-slate-100
             rounded-xl
@@ -251,16 +208,14 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
             focus:ring-2
             focus:ring-purple-500
             "
-          />
+              />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) =>
-              setPassword(e.target.value)
-            }
-            className="
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="
             w-full
             bg-slate-100
             rounded-xl
@@ -269,12 +224,12 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
             focus:ring-2
             focus:ring-purple-500
             "
-          />
+              />
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="
+              <button
+                type="submit"
+                disabled={loading}
+                className="
             w-full
             bg-purple-600
             hover:bg-purple-700
@@ -288,43 +243,30 @@ return ( <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
             shadow-lg
             shadow-purple-500/20
             "
-          >
-            {loading
-              ? "Creating Account..."
-              : "Create Account"}
-          </button>
+              >
+                {loading ? "Creating Account..." : "Create Account"}
+              </button>
+            </form>
 
-        </form>
-
-        <div className="mt-8 text-center">
-
-          <p className="text-slate-500">
-
-            Already have an account?
-
-            <Link
-              to="/login"
-              className="
+            <div className="mt-8 text-center">
+              <p className="text-slate-500">
+                Already have an account?
+                <Link
+                  to="/login"
+                  className="
               ml-2
               text-purple-600
               hover:text-purple-700
               font-semibold
               "
-            >
-              Sign In
-            </Link>
-
-          </p>
-
+                >
+                  Sign In
+                </Link>
+              </p>
+            </div>
+          </div>
         </div>
-
       </div>
-
     </div>
-
-  </div>
-
-</div>
-
-);
+  );
 }
