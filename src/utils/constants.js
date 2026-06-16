@@ -1,5 +1,5 @@
 export const COURSES = [
-  "BTech"
+  "BTech",
 ];
 
 export const BRANCHES = [
